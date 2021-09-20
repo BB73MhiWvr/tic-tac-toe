@@ -8,6 +8,7 @@ use TicTacToe\Specifications\Game\WinConditions\WinConditionSpecification;
 
 class IsGameWon implements GameSpecification
 {
+    /** @var WinConditionSpecification[] $specifications */
     private array $specifications;
 
     public function __construct(WinConditionSpecification ...$specifications)

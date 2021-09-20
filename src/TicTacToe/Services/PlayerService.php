@@ -25,7 +25,7 @@ class PlayerService
         array_push($this->players, array_shift($this->players));
     }
 
-    public function proclaimActivePlayerWin()
+    public function proclaimActivePlayerWin(): void
     {
         $player = $this->getActivePlayer();
         $player->incrementScore();

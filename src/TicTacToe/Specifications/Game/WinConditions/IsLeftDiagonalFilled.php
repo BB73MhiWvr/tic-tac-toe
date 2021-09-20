@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace TicTacToe\Specifications\Game\WinConditions;
 
-use TicTacToe\Entities\Move;
 use TicTacToe\Entities\Player;
 use TicTacToe\Services\BoardService;
 
