@@ -1,0 +1,30 @@
+{
+    "name": "bb73mh1wvr/tic-tac-toe",
+    "description": "Tic tac toe API assignment task",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Krzysztof Płókarz",
+            "email": "krzysztof.plokarz@icloud.com",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "php": "8.0.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "prefer-stable": true
+}
