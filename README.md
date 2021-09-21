@@ -217,6 +217,7 @@ bin/phpstan
 - In `tests\Scenarios` directory functional like tests are written as scenarios
 - `Symfony`, `Laravel`, `Lumen` and `Slim` frameworks were considered to use, none of them was used
 - All of considered frameworks offer much more functionalities than necessary what would make project larger and less readable
+- Anyway API is so simple it doesn't require any framework (I haven't been focusing on security issues)
 - An extremely simple `bramus/router` package was used to spare time for writing own one
 - `symfony/cache` was chosen to provide storage for game state what is necessary in REST architecture
 - `symfony/http-foundation` was used for single method usage `JsonResponse`
@@ -227,4 +228,6 @@ bin/phpstan
 offering game to more than two players
 - Chain of responsibility pattern makes handling and modifying game logic is piece of cake
 - `GameConfiguration` allows to change players symbols
+- Three different strategies to select next round beginning player are implemented
+- Requirement about `finished` value in response was not clear. Should it be a new key or victory value?
 - In case of questions and remarks please contact me
