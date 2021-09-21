@@ -50,11 +50,12 @@ class TicTacToe
     /**
      * @throws Exceptions\MoveException
      */
-    public function registerMove(string $playerSymbol, int $column, int $row): Game
+    public function registerMove(string $playerId, int $column, int $row): Game
     {
-        $move = new Move(new Player($playerSymbol), $column, $row);
+        $move = new Move($playerId, $column, $row);
         (new MoveValidatorFactory())->createValidatorsChain($this->game)->validate($move);
 
+        $this->getGame()->getBoardService()->addMoveToBoard($move);
         $this->game = (new GameHandlerFactory())->createHandlersChain()->handle($this->game);
 
         return $this->game;

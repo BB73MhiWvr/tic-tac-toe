@@ -12,24 +12,24 @@ class WinnerBeginsTest extends TestCase
 {
     public function testShouldNotSwitchToSecondPlayer(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $winnerBegins = new WinnerBegins();
 
         $winnerBegins->choose($playerService);
-        self::assertEquals($first, $playerService->getActivePlayer());
+        self::assertEquals($firstPlayer, $playerService->getActivePlayer());
     }
 
     public function testShouldNotSwitchToFirstPlayer(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $winnerBegins = new WinnerBegins();
 
         $playerService->switchActivePlayer();
         $winnerBegins->choose($playerService);
-        self::assertEquals($second, $playerService->getActivePlayer());
+        self::assertEquals($secondPlayer, $playerService->getActivePlayer());
     }
 }

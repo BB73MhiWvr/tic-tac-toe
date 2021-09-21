@@ -12,24 +12,24 @@ class LooserBeginsTest extends TestCase
 {
     public function testShouldSwitchToSecondPlayer(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $looserBegins = new LooserBegins();
 
         $looserBegins->choose($playerService);
-        self::assertEquals($second, $playerService->getActivePlayer());
+        self::assertEquals($secondPlayer, $playerService->getActivePlayer());
     }
 
     public function testShouldSwitchToFirstPlayer(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $looserBegins = new LooserBegins();
 
         $playerService->switchActivePlayer();
         $looserBegins->choose($playerService);
-        self::assertEquals($first, $playerService->getActivePlayer());
+        self::assertEquals($firstPlayer, $playerService->getActivePlayer());
     }
 }

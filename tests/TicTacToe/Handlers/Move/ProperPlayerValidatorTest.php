@@ -6,11 +6,11 @@ namespace Tests\TicTacToe\Handlers\Move;
 use PHPUnit\Framework\TestCase;
 use Tests\TicTacToe\Traits\PrepareMoveSpecificationsTrait;
 use TicTacToe\Entities\Move;
-use TicTacToe\Exceptions\ImproperBoardMoveException;
+use TicTacToe\Exceptions\ImproperPlayerException;
 use TicTacToe\Exceptions\MoveException;
-use TicTacToe\Handlers\Move\ProperBoardMoveValidator;
+use TicTacToe\Handlers\Move\ProperPlayerValidator;
 
-class ProperBoardMoveValidatorTest extends TestCase
+class ProperPlayerValidatorTest extends TestCase
 {
     use PrepareMoveSpecificationsTrait;
 
@@ -19,10 +19,10 @@ class ProperBoardMoveValidatorTest extends TestCase
      */
     public function testShouldThrowExceptionOnNotFulfilledCondition(): void
     {
-        $boardMoveValidator = new ProperBoardMoveValidator($this->prepareNotFulfilledMoveSpecification());
+        $playerMoveValidator = new ProperPlayerValidator($this->prepareNotFulfilledMoveSpecification());
 
-        self::expectException(ImproperBoardMoveException::class);
-        $boardMoveValidator->validate(new Move('player', 0 ,0));
+        self::expectException(ImproperPlayerException::class);
+        $playerMoveValidator->validate(new Move('player', 0 ,0));
     }
 
     /**
@@ -30,9 +30,9 @@ class ProperBoardMoveValidatorTest extends TestCase
      */
     public function testShouldNotThrowExceptionOnFulfilledCondition(): void
     {
-        $boardMoveValidator = new ProperBoardMoveValidator($this->prepareFulfilledMoveSpecification());
+        $playerMoveValidator = new ProperPlayerValidator($this->prepareFulfilledMoveSpecification());
 
-        $boardMoveValidator->validate(new Move('player', 0 ,0));
+        $playerMoveValidator->validate(new Move('player', 0 ,0));
         self::assertTrue(true);
     }
 }

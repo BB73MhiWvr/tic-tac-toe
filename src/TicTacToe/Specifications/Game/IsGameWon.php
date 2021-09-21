@@ -19,10 +19,10 @@ class IsGameWon implements GameSpecification
     public function isSatisfiedBy(Game $game): bool
     {
         $boardService = $game->getBoardService();
-        $player = $game->getPlayerService()->getActivePlayer();
+        $playerId = $game->getPlayerService()->getActivePlayer()->getId();
 
         foreach ($this->specifications as $specification) {
-            if ($specification->isSatisfiedBy($boardService, $player)) {
+            if ($specification->isSatisfiedBy($boardService, $playerId)) {
                 return true;
             }
         }

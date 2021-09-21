@@ -13,8 +13,8 @@ trait PrepareGameTrait
     private function prepareGame(?NextRoundBeginnerStrategy $nextRoundBeginnerStrategy = null): Game
     {
         return new Game(
-            new Player('first'),
-            new Player('second'),
+            new Player('player one'),
+            new Player('player two'),
             $nextRoundBeginnerStrategy ?? new WinnerBegins()
         );
     }

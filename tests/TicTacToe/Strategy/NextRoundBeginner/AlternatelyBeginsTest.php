@@ -12,49 +12,49 @@ class AlternatelyBeginsTest extends TestCase
 {
     public function testShouldSwitchToSecondPlayerWhenFirstIsActiveAndFirstStartedCurrentRound(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $alternateBegins = new AlternatelyBegins($playerService);
 
         $alternateBegins->choose($playerService);
-        self::assertEquals($second, $playerService->getActivePlayer());
+        self::assertEquals($secondPlayer, $playerService->getActivePlayer());
     }
 
     public function testShouldNotSwitchToFirstPlayerWhenSecondIsActiveAndFirstStartedCurrentRound(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $alternateBegins = new AlternatelyBegins($playerService);
 
         $playerService->switchActivePlayer();
         $alternateBegins->choose($playerService);
-        self::assertEquals($second, $playerService->getActivePlayer());
+        self::assertEquals($secondPlayer, $playerService->getActivePlayer());
     }
 
     public function testShouldSwitchToFirstPlayerWhenSecondIsActiveAndSecondStartedCurrent(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $playerService->switchActivePlayer();
         $alternateBegins = new AlternatelyBegins($playerService);
 
         $alternateBegins->choose($playerService);
-        self::assertEquals($first, $playerService->getActivePlayer());
+        self::assertEquals($firstPlayer, $playerService->getActivePlayer());
     }
 
     public function testShouldNotSwitchToSecondPlayerWhenFirstIsActiveAndSecondStartedCurrent(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playerService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
         $playerService->switchActivePlayer();
         $alternateBegins = new AlternatelyBegins($playerService);
 
         $playerService->switchActivePlayer();
         $alternateBegins->choose($playerService);
-        self::assertEquals($first, $playerService->getActivePlayer());
+        self::assertEquals($firstPlayer, $playerService->getActivePlayer());
     }
 }

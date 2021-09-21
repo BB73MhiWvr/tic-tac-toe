@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tests\TicTacToe\Specifications\Game;
 
 use Tests\TicTacToe\Traits\PrepareGameTrait;
-use TicTacToe\Entities\Player;
 use TicTacToe\Services\BoardService;
 use TicTacToe\Specifications\Game\IsGameWon;
 use TicTacToe\Specifications\Game\WinConditions\WinConditionSpecification;
@@ -59,7 +58,7 @@ class IsGameWonTest extends TestCase
     private function prepareFulfilledCondition(): WinConditionSpecification
     {
         return new class extends WinConditionSpecification {
-            public function isSatisfiedBy(BoardService $boardService, Player $player): bool
+            public function isSatisfiedBy(BoardService $boardService, string $playerId): bool
             {
                 return true;
             }
@@ -69,7 +68,7 @@ class IsGameWonTest extends TestCase
     private function prepareNotFulfilledCondition(): WinConditionSpecification
     {
         return new class extends WinConditionSpecification {
-            public function isSatisfiedBy(BoardService $boardService, Player $player): bool
+            public function isSatisfiedBy(BoardService $boardService, string $playerId): bool
             {
                 return false;
             }

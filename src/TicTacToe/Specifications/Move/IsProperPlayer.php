@@ -6,7 +6,7 @@ namespace TicTacToe\Specifications\Move;
 use TicTacToe\Entities\Move;
 use TicTacToe\Services\PlayerService;
 
-class IsProperPlayerMove implements MoveSpecification
+class IsProperPlayer implements MoveSpecification
 {
     private PlayerService $playerService;
 
@@ -17,7 +17,7 @@ class IsProperPlayerMove implements MoveSpecification
 
     public function isSatisfiedBy(Move $move): bool
     {
-        if ($move->getPlayerId() === $this->playerService->getActivePlayer()->getId()) {
+        if (in_array($move->getPlayerId(), $this->playerService->getPlayersIds())) {
             return true;
         }
 

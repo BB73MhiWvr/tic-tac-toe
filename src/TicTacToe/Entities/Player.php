@@ -5,17 +5,17 @@ namespace TicTacToe\Entities;
 
 class Player
 {
-    private string $symbol;
+    private string $id;
     private int $score = 0;
 
-    public function __construct(string $symbol)
+    public function __construct(string $id)
     {
-        $this->symbol = $symbol;
+        $this->id = $id;
     }
 
-    public function getSymbol(): string
+    public function getId(): string
     {
-        return $this->symbol;
+        return $this->id;
     }
 
     public function incrementScore(): void

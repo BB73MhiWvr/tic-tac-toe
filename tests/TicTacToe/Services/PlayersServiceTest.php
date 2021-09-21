@@ -11,70 +11,80 @@ class PlayersServiceTest extends TestCase
 {
     public function testShouldGetFirstPlayerOnTurn(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playersService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
 
-        $actual = $playersService->getActivePlayer();
-        self::assertEquals($first, $actual);
+        $actual = $playerService->getActivePlayer();
+        self::assertEquals($firstPlayer, $actual);
     }
 
     public function testShouldGetSecondPlayerOnTurnAfterSwitch(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playersService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
 
-        $playersService->switchActivePlayer();
+        $playerService->switchActivePlayer();
 
-        $actual = $playersService->getActivePlayer();
-        self::assertEquals($second, $actual);
+        $actual = $playerService->getActivePlayer();
+        self::assertEquals($secondPlayer, $actual);
     }
 
     public function testShouldGetSecondPlayerOnTurnAfterDoubleSwitch(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playersService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
 
-        $playersService->switchActivePlayer();
-        $playersService->switchActivePlayer();
+        $playerService->switchActivePlayer();
+        $playerService->switchActivePlayer();
 
-        $actual = $playersService->getActivePlayer();
-        self::assertEquals($first, $actual);
+        $actual = $playerService->getActivePlayer();
+        self::assertEquals($firstPlayer, $actual);
     }
 
     public function testShouldIncrementActivePlayerScore(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playersService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
 
-        $firstPlayer = $playersService->getActivePlayer();
-        self::assertEquals(0, $firstPlayer->getScore());
+        $activePlayer = $playerService->getActivePlayer();
+        self::assertEquals(0, $activePlayer->getScore());
 
-        $playersService->proclaimActivePlayerWin();
-        $firstPlayer = $playersService->getActivePlayer();
-        self::assertEquals(1, $firstPlayer->getScore());
+        $playerService->proclaimActivePlayerWin();
+        $activePlayer = $playerService->getActivePlayer();
+        self::assertEquals(1, $activePlayer->getScore());
     }
 
     public function testShouldIncrementTwiceBothPlayersScore(): void
     {
-        $first = new Player('first');
-        $second = new Player('second');
-        $playersService = new PlayerService($first, $second);
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
 
-        $playersService->proclaimActivePlayerWin();
-        $playersService->proclaimActivePlayerWin();
+        $playerService->proclaimActivePlayerWin();
+        $playerService->proclaimActivePlayerWin();
 
-        $firstPlayer = $playersService->getActivePlayer();
-        self::assertEquals(2, $firstPlayer->getScore());
+        $activeFirstPlayer = $playerService->getActivePlayer();
+        self::assertEquals(2, $activeFirstPlayer->getScore());
 
-        $playersService->switchActivePlayer();
-        $playersService->proclaimActivePlayerWin();
-        $playersService->proclaimActivePlayerWin();
+        $playerService->switchActivePlayer();
+        $playerService->proclaimActivePlayerWin();
+        $playerService->proclaimActivePlayerWin();
 
-        $secondPlayer = $playersService->getActivePlayer();
-        self::assertEquals(2, $secondPlayer->getScore());
+        $activeSecondPlayer = $playerService->getActivePlayer();
+        self::assertEquals(2, $activeSecondPlayer->getScore());
+    }
+
+    public function testShouldReturnPlayersIds(): void
+    {
+        $firstPlayer = new Player('player one');
+        $secondPlayer = new Player('player two');
+        $playerService = new PlayerService($firstPlayer, $secondPlayer);
+
+        $expected = ['player one', 'player two'];
+        self::assertEquals($expected, $playerService->getPlayersIds());
     }
 }

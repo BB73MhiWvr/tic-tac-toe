@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace TicTacToe\Specifications\Game\WinConditions;
 
 use TicTacToe\Entities\Move;
-use TicTacToe\Entities\Player;
 use TicTacToe\Services\BoardService;
 
 abstract class WinConditionSpecification
 {
-    public abstract function isSatisfiedBy(BoardService $boardService, Player $player): bool;
+    public abstract function isSatisfiedBy(BoardService $boardService, string $playerId): bool;
 
     protected function getMovesFound(array $moves, ?int $column = null, ?int $row = null): int
     {

@@ -5,7 +5,6 @@ namespace TicTacToe\Services;
 
 use TicTacToe\Entities\Board;
 use TicTacToe\Entities\Move;
-use TicTacToe\Entities\Player;
 
 class BoardService
 {
@@ -63,12 +62,12 @@ class BoardService
         return $this->board->getMoves();
     }
 
-    public function getPlayerMoves(Player $player): array
+    public function getPlayerMoves(string $playerId): array
     {
         return array_filter(
             $this->board->getMoves(),
-            function (Move $move) use ($player) {
-                return $move->getPlayer() === $player;
+            function (Move $move) use ($playerId) {
+                return $move->getPlayerId() === $playerId;
             }
         );
     }

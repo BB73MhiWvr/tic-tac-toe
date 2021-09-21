@@ -5,7 +5,6 @@ namespace Tests\TicTacToe\Specifications\Move;
 
 use TicTacToe\Entities\Board;
 use TicTacToe\Entities\Move;
-use TicTacToe\Entities\Player;
 use TicTacToe\Services\BoardService;
 use TicTacToe\Specifications\Move\IsProperBoardMove;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +15,7 @@ class IsProperBoardMoveTest extends TestCase
     {
         $boardService = new BoardService(new Board());
 
-        $move = new Move(new Player('player'), -1, 0);
+        $move = new Move('player', -1, 0);
 
         $isProperBoardMove = new IsProperBoardMove($boardService);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
@@ -26,7 +25,7 @@ class IsProperBoardMoveTest extends TestCase
     {
         $boardService = new BoardService(new Board());
 
-        $move = new Move(new Player('player'), $boardService->getBoardSize(), 0);
+        $move = new Move('player', $boardService->getBoardSize(), 0);
 
         $isProperBoardMove = new IsProperBoardMove($boardService);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
@@ -36,7 +35,7 @@ class IsProperBoardMoveTest extends TestCase
     {
         $boardService = new BoardService(new Board());
 
-        $move = new Move(new Player('player'), 0, -1);
+        $move = new Move('player', 0, -1);
 
         $isProperBoardMove = new IsProperBoardMove($boardService);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
@@ -46,7 +45,7 @@ class IsProperBoardMoveTest extends TestCase
     {
         $boardService = new BoardService(new Board());
 
-        $move = new Move(new Player('player'), 0, $boardService->getBoardSize());
+        $move = new Move('player', 0, $boardService->getBoardSize());
 
         $isProperBoardMove = new IsProperBoardMove($boardService);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
@@ -55,9 +54,9 @@ class IsProperBoardMoveTest extends TestCase
     public function testShouldReturnFalseForOccupiedSpaceOnBoard(): void
     {
         $boardService = new BoardService(new Board());
-        $boardService->addMoveToBoard(new Move(new Player('player'), 1, 1));
+        $boardService->addMoveToBoard(new Move('player', 1, 1));
 
-        $move = new Move(new Player('player'), 1, 1);
+        $move = new Move('player', 1, 1);
 
         $isProperBoardMove = new IsProperBoardMove($boardService);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
@@ -66,10 +65,10 @@ class IsProperBoardMoveTest extends TestCase
     public function testShouldReturnTrueForEmptySpaceOnBoard(): void
     {
         $boardService = new BoardService(new Board());
-        $boardService->addMoveToBoard(new Move(new Player('player'), 0, 0));
-        $boardService->addMoveToBoard(new Move(new Player('player'), 0, 2));
+        $boardService->addMoveToBoard(new Move('player', 0, 0));
+        $boardService->addMoveToBoard(new Move('player', 0, 2));
 
-        $move = new Move(new Player('player'), 0, 1);
+        $move = new Move('player', 0, 1);
 
         $isProperBoardMove = new IsProperBoardMove($boardService);
         self::assertTrue($isProperBoardMove->isSatisfiedBy($move));

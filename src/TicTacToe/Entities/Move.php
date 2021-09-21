@@ -5,20 +5,20 @@ namespace TicTacToe\Entities;
 
 class Move
 {
-    private Player $player;
+    private string $playerId;
     private int $column;
     private int $row;
 
-    public function __construct(Player $player, int $column, int $row)
+    public function __construct(string $playerId, int $column, int $row)
     {
-        $this->player = $player;
+        $this->playerId = $playerId;
         $this->column = $column;
         $this->row = $row;
     }
 
-    public function getPlayer(): Player
+    public function getPlayerId(): string
     {
-        return $this->player;
+        return $this->playerId;
     }
 
     public function getColumn(): int
