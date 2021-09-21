@@ -15,11 +15,15 @@ class TicTacToe
     private Game $game;
 
     public function __construct(
-        Player $firstPlayer,
-        Player $secondPlayer,
+        string $firstPlayerId,
+        string $secondPlayerId,
         NextRoundBeginnerStrategy $nextRoundBeginnerStrategy
     ) {
-        $this->game = new Game($firstPlayer, $secondPlayer, $nextRoundBeginnerStrategy);
+        $this->game = new Game(
+            new Player($firstPlayerId),
+            new Player($secondPlayerId),
+            $nextRoundBeginnerStrategy
+        );
     }
 
     public function getGame(): Game

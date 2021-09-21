@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Tests\TicTacToe\Scenarios;
 
-use TicTacToe\Entities\Player;
 use TicTacToe\Exceptions\MoveException;
 use TicTacToe\Strategy\NextRoundBeginner\LooserBegins;
 use TicTacToe\TicTacToe;
@@ -21,11 +20,8 @@ class GameRestartTiedScenarioTest extends AbstractNewGameScenario
      */
     protected function prepareGameScenario(): void
     {
-        $this->ticTacToe = new TicTacToe(
-            new Player('x'),
-            new Player('o'),
-            new LooserBegins()
-        );
+        $this->ticTacToe = new TicTacToe('x', 'o', new LooserBegins());
+
         $this->ticTacToe->registerMove('x', 0, 0);
         $this->ticTacToe->registerMove('o', 1, 1);
         $this->ticTacToe->registerMove('x', 2, 2);
