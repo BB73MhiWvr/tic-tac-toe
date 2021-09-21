@@ -23,6 +23,11 @@ class BoardService
         return self::BOARD_SIZE;
     }
 
+    public function clearBoard(): void
+    {
+        $this->board = new Board();
+    }
+
     public function isBoardFilled(): bool
     {
         return sizeof($this->board->getMoves()) >= pow($this->getBoardSize(), 2);

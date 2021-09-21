@@ -16,12 +16,12 @@ class Game
     private bool $isTied = false;
 
     public function __construct(
-        BoardService $boardService,
-        PlayerService $playerService,
+        Player $firstPlayer,
+        Player $secondPlayer,
         NextRoundBeginnerStrategy $nextRoundBeginnerStrategy
     ) {
-        $this->boardService = $boardService;
-        $this->playerService = $playerService;
+        $this->boardService = new BoardService(new Board());
+        $this->playerService = new PlayerService($firstPlayer, $secondPlayer);
         $this->nextRoundBeginnerStrategy = $nextRoundBeginnerStrategy;
     }
 

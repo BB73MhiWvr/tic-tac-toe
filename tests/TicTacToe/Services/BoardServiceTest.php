@@ -39,6 +39,17 @@ class BoardServiceTest extends TestCase
         self::assertTrue($boardService->isBoardFilled());
     }
 
+    public function testShouldClearBoard(): void
+    {
+        $boardService = new BoardService(new Board());
+
+        $boardService->addMoveToBoard(new Move(new Player('player'), 0, 0));
+        self::assertNotEmpty($boardService->getMoves());
+
+        $boardService->clearBoard();
+        self::assertEmpty($boardService->getMoves());
+    }
+
     public function testShouldReturnTrueOnEmptySpaceOnBoardForMove(): void
     {
         $boardService = new BoardService(new Board());

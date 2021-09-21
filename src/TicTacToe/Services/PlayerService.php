@@ -7,22 +7,35 @@ use TicTacToe\Entities\Player;
 
 class PlayerService
 {
-    private array $players = [];
+    private Player $first;
+    private Player $second;
+    private Player $active;
 
     public function __construct(Player $first, Player $second)
     {
-        array_push($this->players, $first);
-        array_push($this->players, $second);
+        $this->first = $first;
+        $this->second = $second;
+        $this->active = $first;
+    }
+
+    public function getFirstPlayer(): Player
+    {
+        return $this->first;
+    }
+
+    public function getSecondPlayer(): Player
+    {
+        return $this->second;
     }
 
     public function getActivePlayer(): Player
     {
-        return reset($this->players);
+        return $this->active;
     }
 
     public function switchActivePlayer(): void
     {
-        array_push($this->players, array_shift($this->players));
+        $this->active = ($this->active === $this->first) ? $this->second : $this->first;
     }
 
     public function proclaimActivePlayerWin(): void
