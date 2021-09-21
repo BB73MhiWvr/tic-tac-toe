@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace Tests\TicTacToe\Scenarios;
 
 use TicTacToe\Entities\Player;
+use TicTacToe\Exceptions\MoveException;
 use TicTacToe\Strategy\NextRoundBeginner\LooserBegins;
 use TicTacToe\TicTacToe;
 
-class GameInitsScenarioTest extends AbstractScenario
+class GameContinuesScenarioTest extends AbstractScenario
 {
     public function testGameShouldNotBeWon(): void
     {
@@ -19,15 +20,20 @@ class GameInitsScenarioTest extends AbstractScenario
         self::assertFalse($this->ticTacToe->getGame()->isTied());
     }
 
-    public function testBoardShouldBeEmpty(): void
+    public function testBoardShouldNotBeEmpty(): void
     {
-        self::assertEmpty($this->ticTacToe->getGame()->getBoardService()->getMoves());
+        self::assertNotEmpty($this->ticTacToe->getGame()->getBoardService()->getMoves());
     }
 
-    public function testFirstPlayerShouldBeOnTurn(): void
+    public function testBoardShouldNotBeFilled(): void
+    {
+        self::assertFalse($this->ticTacToe->getGame()->getBoardService()->isBoardFilled());
+    }
+
+    public function testSecondPlayerShouldBeOnTurn(): void
     {
         self::assertSame(
-            $this->ticTacToe->getGame()->getPlayerService()->getFirstPlayer(),
+            $this->ticTacToe->getGame()->getPlayerService()->getSecondPlayer(),
             $this->ticTacToe->getGame()->getPlayerService()->getActivePlayer()
         );
     }
@@ -38,6 +44,9 @@ class GameInitsScenarioTest extends AbstractScenario
         self::assertEquals(0, $this->ticTacToe->getGame()->getPlayerService()->getSecondPlayer()->getScore());
     }
 
+    /**
+     * @throws MoveException
+     */
     protected function prepareGameScenario(): void
     {
         $this->ticTacToe = new TicTacToe(
@@ -45,5 +54,8 @@ class GameInitsScenarioTest extends AbstractScenario
             new Player('o'),
             new LooserBegins()
         );
+        $this->ticTacToe->registerMove('x', 0, 0);
+        $this->ticTacToe->registerMove('o', 1, 1);
+        $this->ticTacToe->registerMove('x', 2, 2);
     }
 }

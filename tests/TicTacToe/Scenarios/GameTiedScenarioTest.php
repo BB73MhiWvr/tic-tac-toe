@@ -4,17 +4,18 @@ declare(strict_types=1);
 namespace Tests\TicTacToe\Scenarios;
 
 use TicTacToe\Entities\Player;
+use TicTacToe\Exceptions\MoveException;
 use TicTacToe\Strategy\NextRoundBeginner\LooserBegins;
 use TicTacToe\TicTacToe;
 
-class GameInitsScenarioTest extends AbstractScenario
+class GameTiedScenarioTest extends AbstractScenario
 {
     public function testGameShouldNotBeWon(): void
     {
         self::assertFalse($this->ticTacToe->getGame()->isWon());
     }
 
-    public function testGameShouldNotBeTied(): void
+    public function testGameShouldBeTied(): void
     {
         self::assertFalse($this->ticTacToe->getGame()->isTied());
     }
@@ -24,10 +25,10 @@ class GameInitsScenarioTest extends AbstractScenario
         self::assertEmpty($this->ticTacToe->getGame()->getBoardService()->getMoves());
     }
 
-    public function testFirstPlayerShouldBeOnTurn(): void
+    public function testSecondPlayerShouldBeOnTurn(): void
     {
         self::assertSame(
-            $this->ticTacToe->getGame()->getPlayerService()->getFirstPlayer(),
+            $this->ticTacToe->getGame()->getPlayerService()->getSecondPlayer(),
             $this->ticTacToe->getGame()->getPlayerService()->getActivePlayer()
         );
     }
@@ -38,6 +39,9 @@ class GameInitsScenarioTest extends AbstractScenario
         self::assertEquals(0, $this->ticTacToe->getGame()->getPlayerService()->getSecondPlayer()->getScore());
     }
 
+    /**
+     * @throws MoveException
+     */
     protected function prepareGameScenario(): void
     {
         $this->ticTacToe = new TicTacToe(
@@ -45,5 +49,16 @@ class GameInitsScenarioTest extends AbstractScenario
             new Player('o'),
             new LooserBegins()
         );
+        $this->ticTacToe->registerMove('x', 2, 0);
+        $this->ticTacToe->registerMove('o', 2, 1);
+        $this->ticTacToe->registerMove('x', 0, 1);
+        $this->ticTacToe->registerMove('o', 0, 2);
+        $this->ticTacToe->registerMove('x', 1, 2);
+        $this->ticTacToe->registerMove('o', 1, 0);
+        $this->ticTacToe->registerMove('x', 2, 2);
+        $this->ticTacToe->registerMove('o', 1, 1);
+        $this->ticTacToe->registerMove('x', 0, 0);
+
+        $this->ticTacToe->restartGame();
     }
 }

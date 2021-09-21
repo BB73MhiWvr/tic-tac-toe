@@ -3,74 +3,75 @@ declare(strict_types=1);
 
 namespace Tests\TicTacToe\Specifications\Move;
 
-use TicTacToe\Entities\Board;
+use Tests\TicTacToe\Traits\PrepareGameTrait;
 use TicTacToe\Entities\Move;
-use TicTacToe\Services\BoardService;
 use TicTacToe\Specifications\Move\IsProperBoardMove;
 use PHPUnit\Framework\TestCase;
 
 class IsProperBoardMoveTest extends TestCase
 {
+    use PrepareGameTrait;
+
     public function testShouldReturnFalseForColumnIndexSmallerThanZero(): void
     {
-        $boardService = new BoardService(new Board());
+        $game = $this->prepareGame();
 
         $move = new Move('player', -1, 0);
 
-        $isProperBoardMove = new IsProperBoardMove($boardService);
+        $isProperBoardMove = new IsProperBoardMove($game);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
     }
 
     public function testShouldReturnFalseForColumnIndexExceedingBoardSize(): void
     {
-        $boardService = new BoardService(new Board());
+        $game = $this->prepareGame();
 
-        $move = new Move('player', $boardService->getBoardSize(), 0);
+        $move = new Move('player', $game->getBoardService()->getBoardSize(), 0);
 
-        $isProperBoardMove = new IsProperBoardMove($boardService);
+        $isProperBoardMove = new IsProperBoardMove($game);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
     }
 
     public function testShouldReturnFalseForRowIndexSmallerThanZero(): void
     {
-        $boardService = new BoardService(new Board());
+        $game = $this->prepareGame();
 
         $move = new Move('player', 0, -1);
 
-        $isProperBoardMove = new IsProperBoardMove($boardService);
+        $isProperBoardMove = new IsProperBoardMove($game);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
     }
 
     public function testShouldReturnFalseForRowIndexExceedingBoardSize(): void
     {
-        $boardService = new BoardService(new Board());
+        $game = $this->prepareGame();
 
-        $move = new Move('player', 0, $boardService->getBoardSize());
+        $move = new Move('player', 0, $game->getBoardService()->getBoardSize());
 
-        $isProperBoardMove = new IsProperBoardMove($boardService);
+        $isProperBoardMove = new IsProperBoardMove($game);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
     }
 
     public function testShouldReturnFalseForOccupiedSpaceOnBoard(): void
     {
-        $boardService = new BoardService(new Board());
-        $boardService->addMoveToBoard(new Move('player', 1, 1));
+        $game = $this->prepareGame();
+        $game->getBoardService()->addMoveToBoard(new Move('player', 1, 1));
 
         $move = new Move('player', 1, 1);
 
-        $isProperBoardMove = new IsProperBoardMove($boardService);
+        $isProperBoardMove = new IsProperBoardMove($game);
         self::assertFalse($isProperBoardMove->isSatisfiedBy($move));
     }
 
     public function testShouldReturnTrueForEmptySpaceOnBoard(): void
     {
-        $boardService = new BoardService(new Board());
-        $boardService->addMoveToBoard(new Move('player', 0, 0));
-        $boardService->addMoveToBoard(new Move('player', 0, 2));
+        $game = $this->prepareGame();
+        $game->getBoardService()->addMoveToBoard(new Move('player', 0, 0));
+        $game->getBoardService()->addMoveToBoard(new Move('player', 0, 2));
 
         $move = new Move('player', 0, 1);
 
-        $isProperBoardMove = new IsProperBoardMove($boardService);
+        $isProperBoardMove = new IsProperBoardMove($game);
         self::assertTrue($isProperBoardMove->isSatisfiedBy($move));
     }
 }

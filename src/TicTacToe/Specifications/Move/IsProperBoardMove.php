@@ -3,21 +3,25 @@ declare(strict_types=1);
 
 namespace TicTacToe\Specifications\Move;
 
+use TicTacToe\Entities\Game;
 use TicTacToe\Entities\Move;
-use TicTacToe\Services\BoardService;
 
 class IsProperBoardMove implements MoveSpecification
 {
-    private BoardService $boardService;
+    private Game $game;
 
-    public function __construct(BoardService $boardService)
+    public function __construct(Game $game)
     {
-        $this->boardService = $boardService;
+        $this->game = $game;
     }
 
     public function isSatisfiedBy(Move $move): bool
     {
-        if ($move->getColumn() >= $this->boardService->getBoardSize()) {
+        if ($this->game->isWon()) {
+            return false;
+        }
+
+        if ($move->getColumn() >= $this->game->getBoardService()->getBoardSize()) {
             return false;
         }
 
@@ -25,7 +29,7 @@ class IsProperBoardMove implements MoveSpecification
             return false;
         }
 
-        if ($move->getRow() >= $this->boardService->getBoardSize()) {
+        if ($move->getRow() >= $this->game->getBoardService()->getBoardSize()) {
             return false;
         }
 
@@ -33,7 +37,7 @@ class IsProperBoardMove implements MoveSpecification
             return false;
         }
 
-        if ($this->boardService->isEmptySpaceOnBoard($move)) {
+        if ($this->game->getBoardService()->isEmptySpaceOnBoard($move)) {
             return true;
         }
 

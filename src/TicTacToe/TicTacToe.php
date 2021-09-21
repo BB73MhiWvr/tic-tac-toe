@@ -39,8 +39,8 @@ class TicTacToe
     public function deleteGame(): Game
     {
         $this->game = new Game(
-            $this->game->getPlayerService()->getFirstPlayer(),
-            $this->game->getPlayerService()->getSecondPlayer(),
+            new Player($this->game->getPlayerService()->getFirstPlayer()->getId()),
+            new Player($this->game->getPlayerService()->getSecondPlayer()->getId()),
             $this->game->getNextRoundBeginnerStrategy()
         );
 

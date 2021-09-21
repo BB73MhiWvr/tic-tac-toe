@@ -8,7 +8,7 @@ use TicTacToe\Services\BoardService;
 
 abstract class WinConditionSpecification
 {
-    public abstract function isSatisfiedBy(BoardService $boardService, string $playerId): bool;
+    abstract public function isSatisfiedBy(BoardService $boardService, string $playerId): bool;
 
     protected function getMovesFound(array $moves, ?int $column = null, ?int $row = null): int
     {

@@ -6,7 +6,7 @@ namespace Tests\TicTacToe\Scenarios;
 use TicTacToe\Entities\Player;
 use TicTacToe\Exceptions\ImproperPlayerMoveException;
 use TicTacToe\Exceptions\MoveException;
-use TicTacToe\Strategy\NextRoundBeginner\WinnerBegins;
+use TicTacToe\Strategy\NextRoundBeginner\LooserBegins;
 use TicTacToe\TicTacToe;
 
 class ImproperPlayerMoveScenarioTest extends AbstractScenario
@@ -28,7 +28,7 @@ class ImproperPlayerMoveScenarioTest extends AbstractScenario
         $this->ticTacToe = new TicTacToe(
             new Player('x'),
             new Player('o'),
-            new WinnerBegins()
+            new LooserBegins()
         );
         $this->ticTacToe->registerMove('x', 0, 0);
         $this->ticTacToe->registerMove('o', 1, 1);

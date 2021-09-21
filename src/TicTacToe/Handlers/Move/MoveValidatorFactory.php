@@ -17,7 +17,7 @@ class MoveValidatorFactory
             new ProperPlayerMoveValidator(
                 new IsProperPlayerMove($game->getPlayerService()),
                 new ProperBoardMoveValidator(
-                    new IsProperBoardMove($game->getBoardService())
+                    new IsProperBoardMove($game)
                 )
             )
         );

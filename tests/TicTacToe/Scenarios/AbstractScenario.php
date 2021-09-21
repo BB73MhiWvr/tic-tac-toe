@@ -13,11 +13,14 @@ abstract class AbstractScenario extends TestCase
     protected function setUp(): void
     {
         $this->prepareGameScenario();
+        parent::setUp();
+
     }
 
     protected function tearDown(): void
     {
         $this->prepareGameScenario();
+        parent::tearDown();
     }
 
     abstract protected function prepareGameScenario(): void;

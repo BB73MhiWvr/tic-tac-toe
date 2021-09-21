@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Tests\TicTacToe\Traits\PrepareGameSpecificationsTrait;
 use Tests\TicTacToe\Traits\PrepareGameTrait;
 use TicTacToe\Handlers\Game\GameWon;
-use TicTacToe\Strategy\NextRoundBeginner\LooserBegins;
+use TicTacToe\Strategy\NextRoundBeginner\WinnerBegins;
 
 class GameWonTest extends TestCase
 {
@@ -53,7 +53,7 @@ class GameWonTest extends TestCase
 
     public function testShouldNotChangeActivePlayerForWinnerBegins(): void
     {
-        $game = $this->prepareGame();
+        $game = $this->prepareGame(new WinnerBegins());
         $gameWon = new GameWon($this->prepareFulfilledGameSpecification());
         $activePlayer = $game->getPlayerService()->getActivePlayer();
 
@@ -63,7 +63,7 @@ class GameWonTest extends TestCase
 
     public function testShouldChangeActivePlayerForLooserBegins(): void
     {
-        $game = $this->prepareGame(new LooserBegins());
+        $game = $this->prepareGame();
         $gameWon = new GameWon($this->prepareFulfilledGameSpecification());
         $activePlayer = $game->getPlayerService()->getActivePlayer();
 
