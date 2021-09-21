@@ -12,7 +12,7 @@ noted in programming skill assessment task which source author is not authorized
 #### Installation commands
 1. Execute commands in local machine console:
 ```bash
-git clone git@github.com:BB73MhiWvr/tic-tac-toe.git
+git clone https://github.com/BB73MhiWvr/tic-tac-toe.git
 cd tic-tac-toe
 docker build --rm -t tic-tac-toe .
 docker run -it --rm -v $(pwd):/var/www/html -p 8080:8080 --name tic-tac-toe tic-tac-toe
