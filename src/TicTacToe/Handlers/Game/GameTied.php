@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace TicTacToe\Handlers;
+namespace TicTacToe\Handlers\Game;
 
 use TicTacToe\Entities\Game;
 use TicTacToe\Specifications\Game\GameSpecification;

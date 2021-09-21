@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace TicTacToe;
 
 use TicTacToe\Entities\Game;
+use TicTacToe\Entities\Move;
 use TicTacToe\Entities\Player;
-use TicTacToe\Handlers\GameHandlerFactory;
+use TicTacToe\Handlers\Game\GameHandlerFactory;
+use TicTacToe\Handlers\Move\MoveValidatorFactory;
 use TicTacToe\Strategy\NextRoundBeginner\NextRoundBeginnerStrategy;
 
 class TicTacToe
@@ -45,9 +47,14 @@ class TicTacToe
         return $this->game;
     }
 
+    /**
+     * @throws Exceptions\MoveException
+     */
     public function registerMove(string $playerSymbol, int $column, int $row): Game
     {
-        
+        $move = new Move(new Player($playerSymbol), $column, $row);
+        (new MoveValidatorFactory())->createValidatorsChain($this->game)->validate($move);
+
         $this->game = (new GameHandlerFactory())->createHandlersChain()->handle($this->game);
 
         return $this->game;

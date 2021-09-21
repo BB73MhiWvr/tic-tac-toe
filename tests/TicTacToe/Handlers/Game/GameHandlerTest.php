@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\TicTacToe\Handlers;
+namespace Tests\TicTacToe\Handlers\Game;
 
 use PHPUnit\Framework\TestCase;
 use Tests\TicTacToe\Traits\PrepareGameSpecificationsTrait;
 use Tests\TicTacToe\Traits\PrepareGameTrait;
-use TicTacToe\Handlers\GameContinues;
-use TicTacToe\Handlers\GameTied;
-use TicTacToe\Handlers\GameWon;
+use TicTacToe\Handlers\Game\GameContinues;
+use TicTacToe\Handlers\Game\GameTied;
+use TicTacToe\Handlers\Game\GameWon;
 
 class GameHandlerTest extends TestCase
 {

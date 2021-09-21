@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\TicTacToe\Handlers;
+namespace Tests\TicTacToe\Handlers\Game;
 
 use PHPUnit\Framework\TestCase;
 use Tests\TicTacToe\Traits\PrepareGameTrait;
-use TicTacToe\Handlers\GameContinues;
+use TicTacToe\Handlers\Game\GameContinues;
 
 class GameContinuesTest extends TestCase
 {
