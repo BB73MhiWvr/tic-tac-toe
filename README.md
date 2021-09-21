@@ -204,6 +204,14 @@ docker run -it --rm -v $(pwd):/var/www/html -p 8080:8080 --name tic-tac-toe tic-
 bin/phpstan
 ```
 
+### Troubleshooting
+In case of `Permission denied` error while running testing commands:
+```bash
+chmod u+x bin/phpunit
+chmod u+x bin/phpstan
+chmod u+x bin/psalm
+```
+
 ### Author's notices
 
 - Code has been developing for one sunday and two working days only (trip scheduled)
